@@ -10,8 +10,8 @@ class StringCalculator
 
   def add(numbers)
     numbers_list = numbers.split(delimiter(numbers)).map(&:to_i)
-    negative_number = numbers_list.find { |num| num < 0 }
-    raise "negative numbers not allowed #{negative_number}" if negative_number
+    negative_numbers = numbers_list.filter { |num| num < 0 }
+    raise "negative numbers not allowed #{negative_numbers.join(',')}" unless negative_numbers.empty?
 
     numbers_list.sum
   end

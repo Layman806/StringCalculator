@@ -37,5 +37,11 @@ describe StringCalculator do
         expect { StringCalculator.new.add("-1") }.to raise_error("negative numbers not allowed -1")
       end
     end
+
+    context 'when more than one negative integer is present' do
+      it 'raises an error with all the negative integers in it' do
+        expect { StringCalculator.new.add("-1,-2,3") }.to raise_error("negative numbers not allowed -1,-2")
+      end
+    end
   end
 end

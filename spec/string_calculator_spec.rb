@@ -19,5 +19,11 @@ describe StringCalculator do
         expect(StringCalculator.new.add('1,2,3')).to eq(6)
       end
     end
+
+    context 'when delimiter could also be a newline character' do
+      it 'still returns the sum of all numbers' do
+        expect(StringCalculator.new.add("1\n2,3")).to eq(6)
+      end
+    end
   end
 end

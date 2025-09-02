@@ -12,10 +12,14 @@ class StringCalculator
     string.split(delimiter(string)).map(&:to_i)
   end
 
+  def check_for_negative_numbers!(number_list)
+    negative_numbers = number_list.filter{ |num| num < 0 }
+    raise "negative numbers not allowed #{negative_numbers.join(',')}" unless negative_numbers.empty?
+  end
+
   def add(numbers)
     numbers_list = extract_numbers(numbers)
-    negative_numbers = numbers_list.filter { |num| num < 0 }
-    raise "negative numbers not allowed #{negative_numbers.join(',')}" unless negative_numbers.empty?
+    check_for_negative_numbers!(numbers_list)
 
     numbers_list.sum
   end

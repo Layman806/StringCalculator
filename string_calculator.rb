@@ -8,8 +8,12 @@ class StringCalculator
     DELIMITER_REGEX
   end
 
+  def extract_numbers(string)
+    string.split(delimiter(string)).map(&:to_i)
+  end
+
   def add(numbers)
-    numbers_list = numbers.split(delimiter(numbers)).map(&:to_i)
+    numbers_list = extract_numbers(numbers)
     negative_numbers = numbers_list.filter { |num| num < 0 }
     raise "negative numbers not allowed #{negative_numbers.join(',')}" unless negative_numbers.empty?
 

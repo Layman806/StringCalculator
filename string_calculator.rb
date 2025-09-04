@@ -2,13 +2,16 @@
 
 class StringCalculator
   DEFAULT_DELIMITER_REGEX = /,|\n/
-  CUSTOM_DELIMITER_REGEX = /\/\/(?:\[(.+?)\]|(.))\n(.*)/
+  CUSTOM_DELIMITER_REGEX = /\/\/(?:(\[(.+?)\])+|(.))\n(.*)/
 
   def parse_input(string)
     return DEFAULT_DELIMITER_REGEX, string unless string[0..1] == '//'
 
     match_data = CUSTOM_DELIMITER_REGEX.match(string)
-    [match_data[1] || match_data[2], match_data[3]]
+    delimiters = string.include?("[") ? string.scan(/\[(.+?)\]/).flatten : match_data[3]
+    delimiters = Regexp.new(delimiters.map { |d| Regexp.escape(d) }.join("|")) if delimiters.is_a?(Array)
+
+    [delimiters, match_data[-1]]
   end
 
   def check_for_negative_numbers!(number_list)

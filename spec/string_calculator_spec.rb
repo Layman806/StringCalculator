@@ -55,5 +55,11 @@ describe StringCalculator do
         expect(StringCalculator.new.add("//[***]\n1***2***3")).to eq(6)
       end
     end
+
+    context 'when multiple delimiters are specified' do
+      it 'still works' do
+        expect(StringCalculator.new.add("//[*][%]\n1*2%3")).to eq(6)
+        end
+    end
   end
 end

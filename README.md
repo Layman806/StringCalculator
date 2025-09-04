@@ -29,6 +29,7 @@ Input&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Output<br>
 5. Calling add with a negative number will throw an exception: `"negative numbers not allowed <negative_number>"`.
 6. Numbers bigger than 1000 should be ignored, so adding 2 + 1001 = 2
 7. Delimiters can be of any length with the following format: `“//[delimiter]\n”` for example: `“//[***]\n1***2***3”` should return `6`
+8. Allow multiple delimiters like this: `“//[delim1][delim2]\n”` for example `"//[*][%]\n1*2%3"` should return `6`.
 
 ## Project Structure
 - `StringCalculator` is the main class in the root directory, as `./string_calculator.rb`.

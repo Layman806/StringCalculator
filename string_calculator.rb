@@ -2,14 +2,14 @@
 
 class StringCalculator
   DEFAULT_DELIMITER_REGEX = /,|\n/
-  CUSTOM_DELIMITER_REGEX = /\/\/(?:(\[(.+?)\])+|(.))\n(.*)/
+  CUSTOM_DELIMITER_REGEX = %r{\A//(?:(\[(.+?)\])+|(.*))\n(.*)\z}m
 
   def parse_input(string)
-    return DEFAULT_DELIMITER_REGEX, string unless string[0..1] == '//'
+    return DEFAULT_DELIMITER_REGEX, string unless string.start_with?('//')
 
     match_data = CUSTOM_DELIMITER_REGEX.match(string)
     delimiters = string.include?("[") ? string.scan(/\[(.+?)\]/).flatten : match_data[3]
-    delimiters = Regexp.new(delimiters.map { |d| Regexp.escape(d) }.join("|")) if delimiters.is_a?(Array)
+    delimiters = Regexp.new(Array(delimiters).map { |d| Regexp.escape(d) }.join("|"))
 
     [delimiters, match_data[-1]]
   end

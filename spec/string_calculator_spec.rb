@@ -43,5 +43,11 @@ describe StringCalculator do
         expect { StringCalculator.new.add("-1,-2,3") }.to raise_error("negative numbers not allowed -1,-2")
       end
     end
+
+    context 'when array has numbers greater than 1000' do
+      it 'ignores them in the summation' do
+        expect(StringCalculator.new.add("1,1001")).to eq(1)
+      end
+    end
   end
 end

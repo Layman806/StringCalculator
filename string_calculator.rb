@@ -9,7 +9,9 @@ class StringCalculator
   end
 
   def extract_numbers(string)
-    string.split(delimiter(string)).map(&:to_i)
+    string.split(delimiter(string))
+          .map(&:to_i)
+          .select{ |num| num <= 1000 }
   end
 
   def check_for_negative_numbers!(number_list)

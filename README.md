@@ -27,6 +27,7 @@ Input&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Output<br>
    <br>For example,<br>
    `"//;\n1;2"` where the delimiter is ";" should return 3
 5. Calling add with a negative number will throw an exception: `"negative numbers not allowed <negative_number>"`.
+6. Numbers bigger than 1000 should be ignored, so adding 2 + 1001 = 2
 
 ## Project Structure
 - `StringCalculator` is the main class in the root directory, as `./string_calculator.rb`.

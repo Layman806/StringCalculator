@@ -1,17 +1,14 @@
 # frozen_string_literal: true
 
 class StringCalculator
-  DELIMITER_REGEX = /,|\n/
+  DEFAULT_DELIMITER_REGEX = /,|\n/
 
-  def delimiter(string)
-    return string[2] if string[0..1] == '//'
-    DELIMITER_REGEX
-  end
+  def parse_input(string)
+    return DEFAULT_DELIMITER_REGEX, string unless string[0..1] == '//'
 
-  def extract_numbers(string)
-    string.split(delimiter(string))
-          .map(&:to_i)
-          .select{ |num| num <= 1000 }
+    delimiter_regex = /\/\/(?:\[(.+?)\]|(.))\n(.*)/
+    match_data = delimiter_regex.match(string)
+    [match_data[1] || match_data[2], match_data[3]]
   end
 
   def check_for_negative_numbers!(number_list)
@@ -20,9 +17,11 @@ class StringCalculator
   end
 
   def add(numbers)
-    numbers_list = extract_numbers(numbers)
+    delimiter, input_string = parse_input(numbers)
+    numbers_list = input_string.split(delimiter).map(&:to_i)
     check_for_negative_numbers!(numbers_list)
 
-    numbers_list.sum
+    numbers_list.select { |num| num <= 1000}
+                .sum
   end
 end

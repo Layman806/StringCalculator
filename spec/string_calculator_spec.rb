@@ -49,5 +49,11 @@ describe StringCalculator do
         expect(StringCalculator.new.add("1,1001")).to eq(1)
       end
     end
+
+    context 'when delimiter can be of any length' do
+      it 'still works' do
+        expect(StringCalculator.new.add("//[***]\n1***2***3")).to eq(6)
+      end
+    end
   end
 end
